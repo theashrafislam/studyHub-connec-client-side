@@ -56,7 +56,7 @@ const SignIn = () => {
                     <div className="flex items-center justify-between mt-4">
                         <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-                        <Link to='/sign-up' className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline">or sign up</Link>
+                        <Link to='/sign-up' className="text-xs text-red-500 font-semibold uppercase  hover:underline">or sign up</Link>
 
                         <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                     </div>

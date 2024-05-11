@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import logo from '../../public/favicon.svg';
 const SignUp = () => {
     return (
@@ -23,18 +24,18 @@ const SignUp = () => {
                                 </svg>
                             </span>
 
-                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username"/>
+                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name"/>
                         </div>
 
-                        <label for="dropzone-file" className="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                            </svg>
+                        <div className="relative flex items-center mt-8">
+                            <span className="absolute">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </span>
 
-                            <h2 className="mx-3 text-gray-400">Profile Photo</h2>
-
-                            <input id="dropzone-file" type="file" className="hidden" />
-                        </label>
+                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL"/>
+                        </div>
 
                         <div className="relative flex items-center mt-6">
                             <span className="absolute">
@@ -64,9 +65,9 @@ const SignUp = () => {
                             </button>
 
                             <div className="mt-6 text-center ">
-                                <a href="#" className="text-sm text-blue-500 hover:underline dark:text-blue-400">
-                                    Already have an account?
-                                </a>
+                                <p className="text-sm text-blue-500 hover:underline dark:text-blue-400">
+                                    Already have an account? <Link className='text-red-500 font-semibold' to='/sign-in'>Sign In</Link>
+                                </p>
                             </div>
                         </div>
                     </form>

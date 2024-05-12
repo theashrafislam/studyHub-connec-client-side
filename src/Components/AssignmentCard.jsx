@@ -1,28 +1,26 @@
-const AssignmentCard = ({ assignment }) => {
-    const {marks, image, date, difficulty, _id} = assignment;
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
+
+const AssignmentCard = ({ assignment, handleDelete }) => {
+    const { marks, image, date, difficulty, _id, title } = assignment;
+
+    
     return (
         <div>
-            <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <img className="object-cover w-full h-64" src={image} alt="Article"/>
-
-                    <div className="p-6">
-                        <div>
-                            <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Product</span>
-                            <a href="#" className="block mt-2 text-xl font-semibold text-gray-800 transition-colors duration-300 transform dark:text-white hover:text-gray-600 hover:underline" tabIndex="0" role="link">I Built A Successful Blog In One Year</a>
-                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Molestie parturient et sem ipsum volutpat vel. Natoque sem et aliquam mauris egestas quam volutpat viverra. In pretium nec senectus erat. Et malesuada lobortis.</p>
-                        </div>
-
-                        <div className="mt-4">
-                            <div className="flex items-center">
-                                <div className="flex items-center">
-                                    <img className="object-cover h-10 rounded-full" src={image} alt="Avatar"/>
-                                        <a href="#" className="mx-2 font-semibold text-gray-700 dark:text-gray-200" tabIndex="0" role="link">Jone Doe</a>
-                                </div>
-                                <span className="mx-1 text-xs text-gray-600 dark:text-gray-300">21 SEP 2015</span>
-                            </div>
-                        </div>
-                    </div>
+            <div className="p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
+                <img src={image} alt="" className="object-cover object-center w-full max-w-xs rounded-md h-72 dark:bg-gray-500" />
+                <div className="mt-6 mb-2">
+                    <span className="block text-xs font-medium tracking-widest uppercase dark:text-violet-600">{difficulty}</span>
+                    <h2 className="text-xl font-semibold tracking-wide">{title}</h2>
+                </div>
+                <p className="bg-green-400 text-white text-center py-2 text-xl rounded-full">{marks}</p>
+                <div className="flex justify-between items-center gap-2 mt-4 ">
+                    <button onClick={() => handleDelete(_id)} className="btn btn-outline btn-secondary text-base">Delete</button>
+                    <button className="btn btn-outline btn-secondary text-base">Update</button>
+                    <button className="btn btn-outline btn-secondary text-base">View Details</button>
+                </div>
             </div>
+            <Toaster/>
         </div>
     );
 };

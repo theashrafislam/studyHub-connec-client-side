@@ -25,7 +25,7 @@ const CreateAssignment = () => {
         const date = formattedDate;
         const assignmentData = { title, marks, description, image, difficulty, date}
 
-        axios.post('/', assignmentData)
+        axios.post('http://localhost:5000/create-assignment', assignmentData)
             .then(res => {
                 console.log(res);
             })

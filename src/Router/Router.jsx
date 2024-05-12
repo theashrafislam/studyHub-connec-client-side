@@ -4,6 +4,8 @@ import ErrorPage from "../Pages/ErrorPage";
 import Home from "../Pages/Home";
 import SignIn from "../Pages/SignIn";
 import SignUp from "../Pages/SignUp";
+import AssignmentPage from "../Pages/AssignmentPage";
+import CreateAssignment from "../Pages/CreateAssignment";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
             {
                 path: "/sign-up",
                 element: <SignUp/>
+            },
+            {
+                path: "/assignment",
+                element: <AssignmentPage/>
+            },
+            {
+                path: "/create-assignment",
+                element: <CreateAssignment/>
             }
         ]
     },

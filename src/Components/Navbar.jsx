@@ -16,7 +16,7 @@ const Navbar = () => {
     const loggedNaLinks = <>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/">Home</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/assignment">Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/create-assignments">Create Assignments</NavLink></li>
+        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/create-assignment">Create Assignments</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/pending-assignments">Pending Assignments</NavLink></li>
     </>
 

@@ -44,7 +44,7 @@ const AssignmentPage = () => {
                         assignments && assignments.length > 0 ? (
                             assignments.map(assignment => <AssignmentCard key={assignment._id} assignment={assignment} />)
                         ) : (
-                            <NoData />
+                            <NoData/>
                         )
                     )
                 }

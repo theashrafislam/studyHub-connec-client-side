@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../public/favicon.svg';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
 const SignUp = () => {
     const {signUpUser, updateUserProfile} = useContext(AuthContext);
 
@@ -12,7 +13,19 @@ const SignUp = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = {name, photoURL, email, password}
+
+        if (password.length < 6) {
+            toast('Your password must be at least six characters long.', { icon: '⚠', });
+            return;
+        }
+        else if (!/(?=.*?[A-Z])/.test(password)) {
+            toast('Please include at least one uppercase letter in your password.', { icon: '⚠', });
+            return;
+        }
+        else if (!/(?=.*?[a-z])/.test(password)) {
+            toast('Your password must contain at least one lowercase letter.', { icon: '⚠', });
+            return;
+        }
 
         signUpUser(email, password)
             .then(result => {
@@ -20,20 +33,21 @@ const SignUp = () => {
                 if(result) {
                     updateUserProfile(name, photoURL)
                         .then(() => {
-                            // console.log();
+                            
                         })
                         .catch(error => {
                             console.log(error);
                         })
+                    toast.success("Congratulations! You're now signed up and ready to explore!")
                 }
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
+                toast.success("Oops! Something went wrong. Please try again later.")
             })
     }
     return (
         <div>
-            <h1>Hello Iam register</h1>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
                     <form className="w-full max-w-md" onSubmit={handleFormSubmit}>
@@ -42,15 +56,15 @@ const SignUp = () => {
                         </div>
 
                         <div className="flex items-center justify-center mt-6">
-                            <a href="#" className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white">
+                            <Link to='/sign-up' className="w-1/3 pb-4 font-medium text-center text-gray-800 capitalize border-b-2 border-blue-500 dark:border-blue-400 dark:text-white">
                                 sign up
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="relative flex items-center mt-8">
                             <span className="absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </span>
 
@@ -59,8 +73,8 @@ const SignUp = () => {
 
                         <div className="relative flex items-center mt-8">
                             <span className="absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                             </span>
 
@@ -69,8 +83,8 @@ const SignUp = () => {
 
                         <div className="relative flex items-center mt-6">
                             <span className="absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                 </svg>
                             </span>
 
@@ -79,8 +93,8 @@ const SignUp = () => {
 
                         <div className="relative flex items-center mt-4">
                             <span className="absolute">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-3 text-gray-300 dark:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
                             </span>
 
@@ -103,6 +117,7 @@ const SignUp = () => {
                     </form>
                 </div>
             </section>
+            <Toaster />
         </div>
     );
 };

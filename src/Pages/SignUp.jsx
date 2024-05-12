@@ -1,12 +1,42 @@
 import { Link } from 'react-router-dom';
 import logo from '../../public/favicon.svg';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthProvider/AuthProvider';
 const SignUp = () => {
+    const {signUpUser, updateUserProfile} = useContext(AuthContext);
+
+    const handleFormSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const photoURL = form.photoURL.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const user = {name, photoURL, email, password}
+
+        signUpUser(email, password)
+            .then(result => {
+                console.log(result);
+                if(result) {
+                    updateUserProfile(name, photoURL)
+                        .then(() => {
+                            // console.log();
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
     return (
         <div>
             <h1>Hello Iam register</h1>
             <section className="bg-white dark:bg-gray-900">
                 <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
-                    <form className="w-full max-w-md">
+                    <form className="w-full max-w-md" onSubmit={handleFormSubmit}>
                         <div className="flex justify-center mx-auto">
                             <img className="w-[150px]" src={logo} alt=""/>
                         </div>
@@ -24,7 +54,7 @@ const SignUp = () => {
                                 </svg>
                             </span>
 
-                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name"/>
+                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name" name='name'/>
                         </div>
 
                         <div className="relative flex items-center mt-8">
@@ -34,7 +64,7 @@ const SignUp = () => {
                                 </svg>
                             </span>
 
-                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL"/>
+                            <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL" name='photoURL'/>
                         </div>
 
                         <div className="relative flex items-center mt-6">
@@ -44,7 +74,7 @@ const SignUp = () => {
                                 </svg>
                             </span>
 
-                            <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"/>
+                            <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" name='email'/>
                         </div>
 
                         <div className="relative flex items-center mt-4">
@@ -54,7 +84,7 @@ const SignUp = () => {
                                 </svg>
                             </span>
 
-                            <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password"/>
+                            <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" name='password'/>
                         </div>
 
                         

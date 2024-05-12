@@ -3,11 +3,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 import { format } from 'date-fns';
+import axios from "axios";
 
 const CreateAssignment = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
-    const formattedDate = format(startDate, 'MM/dd/yyyy');
+    const formattedDate = format(startDate, 'yyyy/MM/dd');
 
     const handleAssignmentDifficulty = (e) => {
         setAssignmentDifficulty(e.target.value);
@@ -22,9 +23,15 @@ const CreateAssignment = () => {
         const image = form.image.value;
         const difficulty = assignmentDifficulty;
         const date = formattedDate;
-        const clg = { title, marks, description, image, difficulty, date}
-        console.log(clg);
-        // Now you can use `clg` to perform further actions, such as sending data to a server
+        const assignmentData = { title, marks, description, image, difficulty, date}
+
+        axios.post('/', assignmentData)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (

@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import { useState } from "react";
 import { format } from 'date-fns';
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 const CreateAssignment = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -23,14 +24,19 @@ const CreateAssignment = () => {
         const image = form.image.value;
         const difficulty = assignmentDifficulty;
         const date = formattedDate;
-        const assignmentData = { title, marks, description, image, difficulty, date}
+        const assignmentData = { title, marks, description, image, difficulty, date }
 
         axios.post('http://localhost:5000/create-assignment', assignmentData)
             .then(res => {
-                console.log(res);
+                console.log(res.data);
+                if (res.data) {
+                    toast.success('Assignment created successfully.');
+                    form.reset()
+                }
             })
             .catch(error => {
                 console.log(error);
+                toast.error('Failed to create assignment. Please try again later.');
             })
     }
 
@@ -77,13 +83,14 @@ const CreateAssignment = () => {
                         </div>
                         <div>
                             <label htmlFor="" className="text-lg mr-3 font-bold">Select Date</label>
-                            <DatePicker className="border-2 p-2 rounded-lg" selected={startDate} onChange={(date) => setStartDate(date)}/>
+                            <DatePicker className="border-2 p-2 rounded-lg" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                         <div className="flex flex-col">
                             <button type="submit" className="btn btn-outline btn-secondary w-full font-bold text-lg">Create Assignment</button>
                         </div>
                     </form>
                 </div>
+                <Toaster />
             </div>
         </HelmetProvider>
     );

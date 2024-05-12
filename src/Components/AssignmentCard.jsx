@@ -1,7 +1,7 @@
-const AssignmentCard = () => {
+const AssignmentCard = ({assignment}) => {
     return (
         <div>
-            
+            {assignment.title}
         </div>
     );
 };

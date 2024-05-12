@@ -12,8 +12,10 @@ const CreateAssignment = () => {
     const formattedDate = format(startDate, 'yyyy/MM/dd');
 
     const handleAssignmentDifficulty = (e) => {
-        setAssignmentDifficulty(e.target.value);
-    }
+        const selectedDifficulty = e.target.value;
+        const capitalizedDifficulty = selectedDifficulty.charAt(0).toUpperCase() + selectedDifficulty.slice(1);
+        setAssignmentDifficulty(capitalizedDifficulty);
+    }    
 
     const handleCreateAssignmentForm = (e) => {
         e.preventDefault();
@@ -25,6 +27,7 @@ const CreateAssignment = () => {
         const difficulty = assignmentDifficulty;
         const date = formattedDate;
         const assignmentData = { title, marks, description, image, difficulty, date }
+        console.log(assignmentData);
 
         axios.post('http://localhost:5000/create-assignment', assignmentData)
             .then(res => {
@@ -75,9 +78,9 @@ const CreateAssignment = () => {
                                 <label htmlFor="" className="text-lg font-bold">Assignment Difficulty</label>
                                 <select className="select select-bordered w-full" value={assignmentDifficulty} onChange={handleAssignmentDifficulty}>
                                     <option value="" disabled>Select Assignment Difficulty Level</option>
-                                    <option value="easy">Easy</option>
-                                    <option value="medium">Medium</option>
-                                    <option value="hard">Hard</option>
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
                                 </select>
                             </div>
                         </div>

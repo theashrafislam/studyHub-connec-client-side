@@ -4,7 +4,7 @@ const Footer = () => {
     return (
         <div>
             <footer className=" bg-gray-900 mt-16">
-                <div className="container px-6 py-8 mx-auto">
+                <div className="container px-6 py-9 mx-auto">
                     <div className="flex flex-col items-center text-center">
                         <a href="#">
                             {/* <img className="w-auto h-7" src="https://merakiui.com/images/full-logo.svg" alt=""> */}

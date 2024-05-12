@@ -8,14 +8,16 @@ const Navbar = () => {
     console.log(user);
 
     const navLinks = <>
+        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/">Home</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/assignment">Assignments</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/sign-in">Sign In</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/sign-up">Sign Up</NavLink></li>
     </>
     const loggedNaLinks = <>
+        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/">Home</NavLink></li>
         <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/assignment">Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="">Create Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="">Pending Assignments</NavLink></li>
+        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/create-assignments">Create Assignments</NavLink></li>
+        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/pending-assignments">Pending Assignments</NavLink></li>
     </>
 
     useEffect(() => {

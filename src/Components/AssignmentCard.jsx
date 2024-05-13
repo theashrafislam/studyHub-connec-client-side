@@ -9,7 +9,6 @@ const AssignmentCard = ({ assignment, setAssignments }) => {
     const {user} = useContext(AuthContext);
     const userEmail = user?.email;
     const { marks, image, date, difficulty, _id, title } = assignment;
-    console.log(userEmail);
 
     const handleDelete = (id) => {
         Swal.fire({

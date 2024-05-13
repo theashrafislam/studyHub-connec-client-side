@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -7,15 +7,26 @@ import toast, { Toaster } from 'react-hot-toast';
 const AssignmentSubmissionForm = () => {
     const { user } = useContext(AuthContext);
     const userEmail = user?.email;
-    const { id } = useParams()
+    const { id } = useParams();
+    const [title, setTitle] = useState('')
+    const url = `http://localhost:5000/all-assignment/${id}`
+    useEffect( () => {
+        axios(url)
+            .then(res => {
+                setTitle(res?.data?.title)
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [url])
 
     const handleAssignmentSubmission = (e) => {
         e.preventDefault();
         const form = e.target;
         const pdfDocLink = form.link.value;
         const additionalNotes = form.additionalNotes.value;
-        const assignmentData = {pdfDocLink, additionalNotes, userEmail, id}
-        // console.log(assignmentData);
+        const assignmentData = {pdfDocLink, additionalNotes, userEmail, id, title}
+        console.log(assignmentData);
 
         axios.post('http://localhost:5000/submitted-assignment', assignmentData)
             .then(res => {

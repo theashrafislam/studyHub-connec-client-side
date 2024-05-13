@@ -9,6 +9,7 @@ import CreateAssignment from "../Pages/CreateAssignment";
 import AssignmentUpdate from "../Pages/AssignmentUpdate";
 import AssignmentDetails from "../Pages/AssignmentDetails";
 import AssignmentSubmissionForm from "../Pages/AssignmentSubmissionForm";
+import MyAttemtedAssignments from "../Pages/MyAttemtedAssignments";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
             {
                 path: "/assignment-submission-form/:id",
                 element: <AssignmentSubmissionForm/>
+            },
+            {
+                path: "/my-attemted-assignments",
+                element: <MyAttemtedAssignments/>
             }
         ]
     },

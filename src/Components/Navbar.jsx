@@ -75,21 +75,13 @@ const Navbar = () => {
                                 </div>
                             </div>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                <li><a>My Attempted Assignments</a></li>
+                                <li><Link to="/my-attemted-assignments">My Attempted Assignments</Link></li>
                                 <li onClick={handleLogOutUser}><a>Logout</a></li>
                             </ul>
                         </div>
                     </div> : ''}
                 </div>
                 <div>
-                    {/* <details className="dropdown">
-                        <summary className="m-1 btn"><MdWbSunny className="text-3xl" /></summary>
-                        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                            <li onClick={() => handleThemeChange('dark')}><a>Dark</a></li>
-                            <li onClick={() => handleThemeChange('light')}><a>Light</a></li>
-                            <li onClick={() => handleThemeChange('system')}><a>System</a></li>
-                        </ul>
-                    </details> */}
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn m-1"><MdWbSunny className="text-3xl" /></div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

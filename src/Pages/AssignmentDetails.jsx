@@ -8,7 +8,6 @@ const AssignmentDetails = () => {
     useEffect(() => {
         axios(`http://localhost:5000/all-assignment/${id}`)
             .then(res => {
-                console.log(res.data);
                 setLoadedData(res.data)
             })
             .catch(error => {

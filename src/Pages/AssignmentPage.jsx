@@ -4,7 +4,6 @@ import AssignmentCard from "../Components/AssignmentCard";
 import NoData from "../Components/NoData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
 
 const AssignmentPage = () => {
     const allAssignments = useLoaderData();
@@ -22,20 +21,7 @@ const AssignmentPage = () => {
         setSelectedDifficulty(event.target.value);
     };
 
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:5000/all-assignment/${id}`)
-            .then(res => {
-                console.log(res.data);
-                if(res.data.deletedCount > 0) {
-                    toast.success('Assignment deleted successfully.');
-                    setAssignments(prevAssignments => prevAssignments.filter(assignment => assignment._id !== id));
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                toast.error('Failed to delete assignment.')
-            })
-    }
+    
 
     const handleUpdate = (id) => {
         axios.get(`http://localhost:5000/all-assignment/${id}`)
@@ -57,7 +43,7 @@ const AssignmentPage = () => {
                 </Helmet>
                 <div className="text-center">
                     <h1 className="text-xl lg:text-3xl font-semibold mb-2">Assignments</h1>
-                    <p>Choose the level of challenge that suits your expertise and goals. Whether you are a beginner looking to learn the basics, an intermediate developer seeking to enhance your skills, or an advanced coder ready for a complex task, select your difficulty level and embark on a journey of growth and accomplishment.</p>
+                    <p className="w-7/12 mx-auto">Choose the level of challenge that suits your expertise and goals. Whether you are a beginner looking to learn the basics, an intermediate developer seeking to enhance your skills, or an advanced coder ready for a complex task, select your difficulty level and embark on a journey of growth and accomplishment.</p>
                 </div>
                 <div className="my-5 flex justify-center items-center">
                     <select className="select select-secondary w-full max-w-xs" value={selectedDifficulty} onChange={handleDifficultyChange}>
@@ -72,19 +58,25 @@ const AssignmentPage = () => {
                     {
                         selectedDifficulty === "default" ? (
                             ""
-                        ) : (
+                        ) 
+                        
+                        :
+                        
+                        (
                             assignments && assignments.length > 0 ? (
-                                assignments.map(assignment => <AssignmentCard handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment} />)
-                            ) : (
-                                <div className="justify-between">
+                                assignments.map(assignment => <AssignmentCard setAssignments={setAssignments} handleUpdate={handleUpdate} key={assignment._id} assignment={assignment} />)
+                            ) 
+                            
+                            : 
+                            
+                            (
+                                <div className="col-span-full flex justify-center items-center">
                                     <NoData />
                                 </div>
                             )
                         )
                     }
                 </div>
-
-                <Toaster/>
             </div>
         </HelmetProvider>
     );

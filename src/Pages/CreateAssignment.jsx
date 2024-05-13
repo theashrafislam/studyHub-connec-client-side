@@ -1,12 +1,15 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { format } from 'date-fns';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const CreateAssignment = () => {
+    const { user } = useContext(AuthContext);
+    const userEmail  = user?.email;
     const [startDate, setStartDate] = useState(new Date());
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
     const formattedDate = format(startDate, 'yyyy-MM-dd');
@@ -26,7 +29,7 @@ const CreateAssignment = () => {
         const image = form.image.value;
         const difficulty = assignmentDifficulty;
         const date = formattedDate;
-        const assignmentData = { title, marks, description, image, difficulty, date }
+        const assignmentData = { title, marks, description, image, difficulty, date, userEmail }
         console.log(assignmentData);
 
         axios.post('http://localhost:5000/create-assignment', assignmentData)
@@ -51,7 +54,7 @@ const CreateAssignment = () => {
                 </Helmet>
                 <div className="text-center space-y-2">
                     <h1 className="font-bold text-xl md:text-3xl">Create Assignment</h1>
-                    <p className="text-lg">Welcome to the Create Assignment page! Here, you can easily create new assignments to share with all users on StudyHub Connect. Simply fill out the form below with the assignment details, including the title, description, marks, thumbnail image URL, difficulty level, and due date. Once submitted, your assignment will be available for all users to access and complete. Get started now and enrich the learning experience for everyone on our platform!</p>
+                    <p className="text-lg w-7/12 mx-auto">Welcome to the Create Assignment page! Here, you can easily create new assignments to share with all users on StudyHub Connect. Simply fill out the form below with the assignment details, including the title, description, marks, thumbnail image URL, difficulty level, and due date. Once submitted, your assignment will be available for all users to access and complete. Get started now and enrich the learning experience for everyone on our platform!</p>
                 </div>
                 <div className="mt-8">
                     <form className="space-y-4" onSubmit={handleCreateAssignmentForm}>

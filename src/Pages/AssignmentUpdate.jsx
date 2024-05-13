@@ -23,6 +23,7 @@ const AssignmentUpdate = () => {
             })
     }, [id])
     const { marks, image, difficulty, description, _id, title, date } = loadedData;
+    console.log(difficulty);
 
     const handleUpdateAssignmentForm = (e) => {
         e.preventDefault();
@@ -35,11 +36,11 @@ const AssignmentUpdate = () => {
         const date = form.date.value;
         const assignmentData = { title, marks, description, image, difficulty, date }
         // console.log(assignmentData);
-        
-        axios.patch(`http://localhost:5000/all-assignment/${id}`, assignmentData)
+
+        axios.put(`http://localhost:5000/all-assignment/${id}`, assignmentData)
             .then(res => {
                 console.log(res.data);
-                if(res.data.modifiedCount > 0){
+                if (res.data.modifiedCount > 0) {
                     toast.success('Congratulations! Assignment has been successfully updated.')
                 }
             })
@@ -83,14 +84,15 @@ const AssignmentUpdate = () => {
                                 <label htmlFor="" className="text-lg font-bold">Assignment Difficulty</label>
                                 <select
                                     className="select select-bordered w-full"
-                                    value={assignmentDifficulty}
                                     onChange={(e) => setAssignmentDifficulty(e.target.value)}
                                 >
                                     <option value="" disabled>Select Assignment Difficulty Level</option>
-                                    <option value="Easy">Easy</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Hard">Hard</option>
+                                    <option value="Easy" selected={difficulty === "Easy"}>Easy</option>
+                                    <option value="Medium" selected={difficulty === "Medium"}>Medium</option>
+                                    <option value="Hard" selected={difficulty === "Hard"}>Hard</option>
                                 </select>
+
+
                             </div>
                         </div>
                         <div className="flex flex-col w-full">
@@ -106,7 +108,7 @@ const AssignmentUpdate = () => {
                         </div>
                     </form>
                 </div>
-                <Toaster/>
+                <Toaster />
             </div>
         </HelmetProvider>
     );

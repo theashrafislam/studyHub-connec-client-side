@@ -4,7 +4,7 @@ import AssignmentCard from "../Components/AssignmentCard";
 import NoData from "../Components/NoData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AssignmentPage = () => {
     const allAssignments = useLoaderData();
@@ -68,7 +68,7 @@ const AssignmentPage = () => {
                         <option value="Hard">Hard</option>
                     </select>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-between">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-center justify-center">
                     {
                         selectedDifficulty === "default" ? (
                             ""
@@ -76,13 +76,15 @@ const AssignmentPage = () => {
                             assignments && assignments.length > 0 ? (
                                 assignments.map(assignment => <AssignmentCard handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment} />)
                             ) : (
-                                <NoData />
+                                <div className="justify-between">
+                                    <NoData />
+                                </div>
                             )
                         )
                     }
                 </div>
 
-
+                <Toaster/>
             </div>
         </HelmetProvider>
     );

@@ -16,10 +16,10 @@ const AssignmentCard = ({ assignment, handleDelete}) => {
                 <div className="flex justify-between items-center gap-2 mt-4 ">
                     <button onClick={() => handleDelete(_id)} className="btn btn-outline btn-secondary text-base">Delete</button>
                     <Link to={`/assignment-update/${_id}`} className="btn btn-outline btn-secondary text-base">Update</Link>
-                    <Link className="btn btn-outline btn-secondary text-base">View Details</Link>
+                    <Link to={`/all-assignment/${_id}`} className="btn btn-outline btn-secondary text-base">View Details</Link>
                 </div>
             </div>
-            <Toaster/>
+
         </div>
     );
 };

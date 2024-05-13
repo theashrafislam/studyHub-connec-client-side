@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const CreateAssignment = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
-    const formattedDate = format(startDate, 'dd/mm/yyyy');
+    const formattedDate = format(startDate, 'yyyy-MM-dd');
 
     const handleAssignmentDifficulty = (e) => {
         const selectedDifficulty = e.target.value;
@@ -86,7 +86,7 @@ const CreateAssignment = () => {
                         </div>
                         <div>
                             <label htmlFor="" className="text-lg mr-3 font-bold">Select Date</label>
-                            <DatePicker className="border-2 p-2 rounded-lg" selected={startDate} onChange={(date) => setStartDate(date)} />
+                            <DatePicker required className="border-2 p-2 rounded-lg" selected={startDate} onChange={(date) => setStartDate(date)} />
                         </div>
                         <div className="flex flex-col">
                             <button type="submit" className="btn btn-outline btn-secondary w-full font-bold text-lg">Create Assignment</button>

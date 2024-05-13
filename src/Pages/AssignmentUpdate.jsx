@@ -2,26 +2,52 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import toast, { Toaster } from 'react-hot-toast';
 
 const AssignmentUpdate = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState({});
+    console.log(loadedData);
     const [startDate, setStartDate] = useState('');
+    const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
+
 
     useEffect(() => {
-        axios(`http://localhost:5000/all-assignment/${id}`)
+        axios.get(`http://localhost:5000/all-assignment/${id}`)
             .then(res => {
+                // console.log(res.data);
                 setLoadedData(res.data)
-                if (res.data?.date) {
-                    // Convert date to yyyy-MM-dd format
-                    const formattedDate = new Date(res.data.date).toISOString().split('T')[0];
-                    setStartDate(formattedDate);
-                }
+            })
+            .catch(error => {
+                console.log(error);
             })
     }, [id])
-    console.log(loadedData);
-    const { marks, image, difficulty, description, _id, title } = loadedData;
+    const { marks, image, difficulty, description, _id, title, date } = loadedData;
 
+    const handleUpdateAssignmentForm = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const title = form.title.value;
+        const marks = form.mark.value;
+        const description = form.description.value;
+        const image = form.image.value;
+        const difficulty = assignmentDifficulty;
+        const date = form.date.value;
+        const assignmentData = { title, marks, description, image, difficulty, date }
+        // console.log(assignmentData);
+        
+        axios.patch(`http://localhost:5000/all-assignment/${id}`, assignmentData)
+            .then(res => {
+                console.log(res.data);
+                if(res.data.modifiedCount > 0){
+                    toast.success('Congratulations! Assignment has been successfully updated.')
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                toast.success("We're sorry, but there was an issue updating your assignment.")
+            })
+    }
     return (
         <HelmetProvider>
             <div className="my-10">
@@ -33,7 +59,7 @@ const AssignmentUpdate = () => {
                     <p className="text-lg">Welcome to the Update Assignment page! Here, you have the opportunity to modify and refine your assignments with ease. Whether you need to correct errors, adjust parameters, or enhance the content, this page empowers you to keep your assignments up-to-date and relevant. Take control of your assignments and ensure they align perfectly with your objectives and expectations.</p>
                 </div>
                 <div className="mt-8">
-                    <form className="space-y-4" >
+                    <form className="space-y-4" onSubmit={handleUpdateAssignmentForm}>
                         <div className="flex lg:flex-row flex-col gap-4">
                             <div className="flex flex-col w-full">
                                 <label htmlFor="title" className="text-lg font-bold">Title</label>
@@ -55,7 +81,11 @@ const AssignmentUpdate = () => {
                             </div>
                             <div className="flex flex-col w-full">
                                 <label htmlFor="" className="text-lg font-bold">Assignment Difficulty</label>
-                                <select className="select select-bordered w-full" value={difficulty}>
+                                <select
+                                    className="select select-bordered w-full"
+                                    value={assignmentDifficulty}
+                                    onChange={(e) => setAssignmentDifficulty(e.target.value)}
+                                >
                                     <option value="" disabled>Select Assignment Difficulty Level</option>
                                     <option value="Easy">Easy</option>
                                     <option value="Medium">Medium</option>
@@ -65,7 +95,7 @@ const AssignmentUpdate = () => {
                         </div>
                         <div className="flex flex-col w-full">
                             <label htmlFor="date" className="text-lg font-bold">Date</label>
-                            <input type="date" name="date" id="date" defaultValue={startDate} className="border-2 p-2 rounded-lg" placeholder="Item Name" required />
+                            <input type="date" name="date" id="date" defaultValue={date} className="border-2 p-2 rounded-lg" placeholder="Item Name" required />
                         </div>
                         {/* <div>
                             <label htmlFor="" className="text-lg mr-3 font-bold">Select Date</label>
@@ -76,6 +106,7 @@ const AssignmentUpdate = () => {
                         </div>
                     </form>
                 </div>
+                <Toaster/>
             </div>
         </HelmetProvider>
     );

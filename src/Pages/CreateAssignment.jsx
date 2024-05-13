@@ -9,7 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const CreateAssignment = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
-    const formattedDate = format(startDate, 'yyyy/MM/dd');
+    const formattedDate = format(startDate, 'dd/mm/yyyy');
 
     const handleAssignmentDifficulty = (e) => {
         const selectedDifficulty = e.target.value;
@@ -58,7 +58,7 @@ const CreateAssignment = () => {
                         <div className="flex lg:flex-row flex-col gap-4">
                             <div className="flex flex-col w-full">
                                 <label htmlFor="title" className="text-lg font-bold">Title</label>
-                                <input type="text" name="title" id="title" className="border-2 p-2 rounded-lg" placeholder="Photo URL" required />
+                                <input type="text" name="title" id="title" className="border-2 p-2 rounded-lg" placeholder="Enter your title" required />
                             </div>
                             <div className="flex flex-col w-full">
                                 <label htmlFor="marks" className="text-lg font-bold">Marks</label>

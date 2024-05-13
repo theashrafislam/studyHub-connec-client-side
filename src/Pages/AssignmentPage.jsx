@@ -4,7 +4,7 @@ import AssignmentCard from "../Components/AssignmentCard";
 import NoData from "../Components/NoData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AssignmentPage = () => {
     const allAssignments = useLoaderData();
@@ -37,6 +37,16 @@ const AssignmentPage = () => {
             })
     }
 
+    const handleUpdate = (id) => {
+        axios.get(`http://localhost:5000/all-assignment/${id}`)
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     console.log(assignments);
 
     return (
@@ -64,7 +74,7 @@ const AssignmentPage = () => {
                             ""
                         ) : (
                             assignments && assignments.length > 0 ? (
-                                assignments.map(assignment => <AssignmentCard handleDelete={handleDelete} key={assignment._id} assignment={assignment} />)
+                                assignments.map(assignment => <AssignmentCard handleUpdate={handleUpdate} handleDelete={handleDelete} key={assignment._id} assignment={assignment} />)
                             ) : (
                                 <NoData />
                             )

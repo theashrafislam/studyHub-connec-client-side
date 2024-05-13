@@ -1,9 +1,8 @@
-import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
-const AssignmentCard = ({ assignment, handleDelete }) => {
+const AssignmentCard = ({ assignment, handleDelete}) => {
     const { marks, image, date, difficulty, _id, title } = assignment;
-
     
     return (
         <div>
@@ -16,8 +15,8 @@ const AssignmentCard = ({ assignment, handleDelete }) => {
                 <p className="bg-green-400 text-white text-center py-2 text-xl rounded-full">{marks}</p>
                 <div className="flex justify-between items-center gap-2 mt-4 ">
                     <button onClick={() => handleDelete(_id)} className="btn btn-outline btn-secondary text-base">Delete</button>
-                    <button className="btn btn-outline btn-secondary text-base">Update</button>
-                    <button className="btn btn-outline btn-secondary text-base">View Details</button>
+                    <Link to={`/assignment-update/${_id}`} className="btn btn-outline btn-secondary text-base">Update</Link>
+                    <Link className="btn btn-outline btn-secondary text-base">View Details</Link>
                 </div>
             </div>
             <Toaster/>

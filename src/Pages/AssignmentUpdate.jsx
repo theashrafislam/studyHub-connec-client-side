@@ -13,7 +13,7 @@ const AssignmentUpdate = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/all-assignment/${id}`)
+        axios.get(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`)
             .then(res => {
                 // console.log(res.data);
                 setLoadedData(res.data)
@@ -37,7 +37,7 @@ const AssignmentUpdate = () => {
         const assignmentData = { title, marks, description, image, difficulty, date }
         // console.log(assignmentData);
 
-        axios.put(`http://localhost:5000/all-assignment/${id}`, assignmentData)
+        axios.put(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`, assignmentData)
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {

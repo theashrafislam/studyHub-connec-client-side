@@ -9,7 +9,7 @@ const PendingAssignments = () => {
     const [loadedData, setLoadedData] = useState([]);
     const {user} = useContext(AuthContext)
     console.log(loadedData);
-    const url = `http://localhost:5000/submitted-assignment?email=${user.email}`
+    const url = `https://study-hub-connect-server-side.vercel.app/submitted-assignment?email=${user.email}`
     useEffect( () => {
         axios(url, {withCredentials: true})
             .then(res => {

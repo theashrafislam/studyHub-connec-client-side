@@ -10,7 +10,7 @@ const AssignmentSubmissionForm = () => {
     const displayName = user?.displayName;
     const { id } = useParams();
     const [title, setTitle] = useState('')
-    const url = `http://localhost:5000/all-assignment/${id}`
+    const url = `https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`
     useEffect( () => {
         axios(url)
             .then(res => {
@@ -29,7 +29,7 @@ const AssignmentSubmissionForm = () => {
         const assignmentData = {pdfDocLink, additionalNotes, userEmail, id, title, displayName }
         console.log(assignmentData);
 
-        axios.post('http://localhost:5000/submitted-assignment', assignmentData)
+        axios.post('https://study-hub-connect-server-side.vercel.app/submitted-assignment', assignmentData)
             .then(res => {
                 console.log(res.data);
                 if(res.data.insertedId) {

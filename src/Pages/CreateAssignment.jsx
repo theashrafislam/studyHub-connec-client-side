@@ -35,7 +35,7 @@ const CreateAssignment = () => {
         const assignmentData = { title, marks, description, image, difficulty, date, userEmail }
         console.log(assignmentData);
 
-        axios.post('http://localhost:5000/create-assignment', assignmentData)
+        axios.post('https://study-hub-connect-server-side.vercel.app/create-assignment', assignmentData)
             .then(res => {
                 console.log(res.data);
                 if (res.data) {

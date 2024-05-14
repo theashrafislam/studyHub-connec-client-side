@@ -22,7 +22,7 @@ const AssignmentCard = ({ assignment, setAssignments }) => {
           }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/all-assignment/${id}`, { data: { userEmail }})
+                axios.delete(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`, { data: { userEmail }})
                 .then(res => {
                     console.log(res.data);
                     if(res.data.deletedCount > 0) {

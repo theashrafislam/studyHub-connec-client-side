@@ -9,7 +9,7 @@ const GiveMarkPage = () => {
     const [loadedData, setLoadedData] = useState([]);
     const {user} = useContext(AuthContext);
     console.log(user.email);
-    const url = `http://localhost:5000/submitted-assignment/id/${id}?email=${user.email}`
+    const url = `https://study-hub-connect-server-side.vercel.app/submitted-assignment/id/${id}?email=${user.email}`
     useEffect(() => {
         axios(url, {withCredentials: true})
         
@@ -28,7 +28,7 @@ const GiveMarkPage = () => {
         const feedback = form.feedback.value;
         const submissionData = { mark, feedback }
 
-        axios.put(`http://localhost:5000/submitted-assignment/${id}`, submissionData)
+        axios.put(`https://study-hub-connect-server-side.vercel.app/submitted-assignment/${id}`, submissionData)
             .then(res => {
                 console.log(res.data);
                 if (res.data.modifiedCount > 0) {

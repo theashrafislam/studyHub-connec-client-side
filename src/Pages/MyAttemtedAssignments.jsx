@@ -7,7 +7,7 @@ const MyAttemtedAssignments = () => {
     const { user } = useContext(AuthContext);
     const userEmail = user?.email;
     const [myAssignment, setMyAssignment] = useState([])
-    const url = `http://localhost:5000/submitted-assignment/email/${userEmail}?email=${userEmail}`
+    const url = `https://study-hub-connect-server-side.vercel.app/submitted-assignment/email/${userEmail}?email=${userEmail}`
     useEffect(() => {
         axios(url, {withCredentials: true})
             .then(res => {

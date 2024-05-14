@@ -24,7 +24,7 @@ const AssignmentPage = () => {
     
 
     const handleUpdate = (id) => {
-        axios.get(`http://localhost:5000/all-assignment/${id}`)
+        axios.get(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`)
             .then(res => {
                 console.log(res.data);
             })

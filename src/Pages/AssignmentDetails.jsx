@@ -9,7 +9,7 @@ const AssignmentDetails = () => {
     const {user} = useContext(AuthContext);
     console.log(loadedData);
     const { title, marks, image, difficulty, date, description, _id} = loadedData;
-    const url = `http://localhost:5000/all-assignment/${id}?email=${user.email}`
+    const url = `https://study-hub-connect-server-side.vercel.app/all-assignment/${id}?email=${user.email}`
     useEffect(() => {
         axios(url, {withCredentials: true})
             .then(res => {

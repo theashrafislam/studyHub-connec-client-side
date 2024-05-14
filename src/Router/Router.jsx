@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: "/assignment",
                 element: <AssignmentPage/>,
-                loader: () => fetch('http://localhost:5000/all-assignment')
+                loader: () => fetch('https://study-hub-connect-server-side.vercel.app/all-assignment')
             },
             {
                 path: "/create-assignment",
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
             {
                 path: "/assignment-details-page/:id",
                 element: <PrivateRoute><AssignmentDetails/></PrivateRoute>,
-                // loader: ({params}) => fetch(`http://localhost:5000/all-assignment/${params.id}`)
+                // loader: ({params}) => fetch(`https://study-hub-connect-server-side.vercel.app/all-assignment/${params.id}`)
             },
             {
                 path: "/assignment-submission-form/:id",
@@ -61,7 +61,7 @@ const router = createBrowserRouter([
             {
                 path: "/pending-assignments",
                 element: <PrivateRoute><PendingAssignments/></PrivateRoute>,
-                // loader: () => fetch('http://localhost:5000/submitted-assignment')
+                // loader: () => fetch('https://study-hub-connect-server-side.vercel.app/submitted-assignment')
             },
             {
                 path: "/give-mark-page/:id",

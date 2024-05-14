@@ -51,7 +51,7 @@ const AssignmentUpdate = () => {
     }
     return (
         <HelmetProvider>
-            <div className="my-10">
+            <div className="my-10 lg:mx-0 mx-4">
                 <Helmet>
                     <title>Update Assignment || StudyHub Connect</title>
                 </Helmet>

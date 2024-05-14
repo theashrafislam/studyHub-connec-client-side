@@ -41,7 +41,7 @@ const GiveMarkPage = () => {
             })
     }
     return (
-        <div className="mt-10">
+        <div className="mt-10 lg:mx-0 mx-4">
             <div>
                 {/* <h1><span className="font-semibold">Assignmet Title: </span>{title}</h1>
                 <h1><span className="font-semibold">Assignmen PDF / Doc Link: </span>{pdfDocLink}</h1>

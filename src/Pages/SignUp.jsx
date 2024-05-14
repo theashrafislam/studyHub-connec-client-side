@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../public/favicon.svg';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 const SignUp = () => {
-    const { signUpUser, updateUserProfile } = useContext(AuthContext);
+    const { signUpUser, updateUserProfile, signOutUser } = useContext(AuthContext);
+    const navigate = useNavigate()
 
     const handleFormSubmit = (event) => {
         event.preventDefault();
@@ -34,16 +35,23 @@ const SignUp = () => {
                 if (result) {
                     updateUserProfile(name, photoURL)
                         .then(() => {
-
+                            signOutUser()
+                                .then(res => {
+                                        navigate('/sign-in')
+                                })
+                                .catch(error => {
+                                    console.log(error);
+                                })
                         })
                         .catch(error => {
                             console.log(error);
                         })
                     toast.success("Congratulations! You're now signed up and ready to explore!")
+
                 }
             })
             .catch(error => {
-                // console.log(error);
+                console.log(error);
                 toast.success("Oops! Something went wrong. Please try again later.")
             })
     }
@@ -73,7 +81,7 @@ const SignUp = () => {
                                     </svg>
                                 </span>
 
-                                <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name" name='name' required/>
+                                <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Full Name" name='name' required />
                             </div>
 
                             <div className="relative flex items-center mt-8">
@@ -83,7 +91,7 @@ const SignUp = () => {
                                     </svg>
                                 </span>
 
-                                <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL" name='photoURL' required/>
+                                <input type="text" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Photo URL" name='photoURL' required />
                             </div>
 
                             <div className="relative flex items-center mt-6">
@@ -93,7 +101,7 @@ const SignUp = () => {
                                     </svg>
                                 </span>
 
-                                <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" name='email' required/>
+                                <input type="email" className="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address" name='email' required />
                             </div>
 
                             <div className="relative flex items-center mt-4">
@@ -103,7 +111,7 @@ const SignUp = () => {
                                     </svg>
                                 </span>
 
-                                <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" name='password' required/>
+                                <input type="password" className="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" name='password' required />
                             </div>
 
 

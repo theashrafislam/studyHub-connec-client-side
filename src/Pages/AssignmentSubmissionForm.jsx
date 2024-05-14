@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const AssignmentSubmissionForm = () => {
     const { user } = useContext(AuthContext);
     const userEmail = user?.email;
+    const displayName = user?.displayName;
     const { id } = useParams();
     const [title, setTitle] = useState('')
     const url = `http://localhost:5000/all-assignment/${id}`
@@ -25,7 +26,7 @@ const AssignmentSubmissionForm = () => {
         const form = e.target;
         const pdfDocLink = form.link.value;
         const additionalNotes = form.additionalNotes.value;
-        const assignmentData = {pdfDocLink, additionalNotes, userEmail, id, title}
+        const assignmentData = {pdfDocLink, additionalNotes, userEmail, id, title, displayName }
         console.log(assignmentData);
 
         axios.post('http://localhost:5000/submitted-assignment', assignmentData)
@@ -42,7 +43,7 @@ const AssignmentSubmissionForm = () => {
     }
 
     return (
-        <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-12">
+        <section className="max-w-4xl p-6 lg:mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-12 mx-4">
             <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Assignment Submission Form</h2>
 
             <form onSubmit={handleAssignmentSubmission}>

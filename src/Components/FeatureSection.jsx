@@ -4,9 +4,9 @@ import img3 from '../assets/FetureImages/fetureImage3.jpg';
 const FeatureSection = () => {
     return (
         <div className="my-16">
-            <div className='space-y-4 text-center'>
+            <div className='space-y-4 text-center lg:mx-0 mx-4'>
                 <h1 className='text-3xl font-bold'>Explore Our Features</h1>
-                <p className='w-7/12 mx-auto'>Unlock the full potential of our platform with our comprehensive range of features. Dive into a world of possibilities designed to enhance your learning experience. From interactive study materials to seamless collaboration tools, our features are crafted to empower you every step of the way. Discover what sets us apart and revolutionize your learning journey with StudyHub Connect</p>
+                <p className='lg:w-7/12 lg:mx-auto'>Unlock the full potential of our platform with our comprehensive range of features. Dive into a world of possibilities designed to enhance your learning experience. From interactive study materials to seamless collaboration tools, our features are crafted to empower you every step of the way. Discover what sets us apart and revolutionize your learning journey with StudyHub Connect</p>
             </div>
             <section className="p-4 lg:p-8 dark:bg-gray-100 dark:text-gray-800">
                 <div className="container mx-auto space-y-12">

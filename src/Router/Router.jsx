@@ -10,6 +10,9 @@ import AssignmentUpdate from "../Pages/AssignmentUpdate";
 import AssignmentDetails from "../Pages/AssignmentDetails";
 import AssignmentSubmissionForm from "../Pages/AssignmentSubmissionForm";
 import MyAttemtedAssignments from "../Pages/MyAttemtedAssignments";
+import PendingAssignments from "../Pages/PendingAssignments";
+import GiveMarkPage from "../Pages/GiveMarkPage";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -36,24 +39,33 @@ const router = createBrowserRouter([
             },
             {
                 path: "/create-assignment",
-                element: <CreateAssignment/>
+                element: <PrivateRoute><CreateAssignment/></PrivateRoute>
             },
             {
                 path: "/assignment-update/:id",
                 element: <AssignmentUpdate/>,
             },
             {
-                path: "/all-assignment/:id",
-                element: <AssignmentDetails/>,
+                path: "/assignment-details-page/:id",
+                element: <PrivateRoute><AssignmentDetails/></PrivateRoute>,
                 // loader: ({params}) => fetch(`http://localhost:5000/all-assignment/${params.id}`)
             },
             {
                 path: "/assignment-submission-form/:id",
-                element: <AssignmentSubmissionForm/>
+                element: <PrivateRoute><AssignmentSubmissionForm/></PrivateRoute>
             },
             {
                 path: "/my-attemted-assignments",
-                element: <MyAttemtedAssignments/>
+                element: <PrivateRoute><MyAttemtedAssignments/></PrivateRoute>
+            },
+            {
+                path: "/pending-assignments",
+                element: <PrivateRoute><PendingAssignments/></PrivateRoute>,
+                // loader: () => fetch('http://localhost:5000/submitted-assignment')
+            },
+            {
+                path: "/give-mark-page/:id",
+                element: <PrivateRoute><GiveMarkPage/></PrivateRoute>,
             }
         ]
     },

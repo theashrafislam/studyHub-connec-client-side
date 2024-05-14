@@ -1,27 +1,32 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AssignmentDetails = () => {
     const { id } = useParams();
-    const [loadedData, setLoadedData] = useState({})
+    const [loadedData, setLoadedData] = useState({});
+    const {user} = useContext(AuthContext);
+    console.log(loadedData);
+    const { title, marks, image, difficulty, date, description, _id} = loadedData;
+    const url = `http://localhost:5000/all-assignment/${id}?email=${user.email}`
     useEffect(() => {
-        axios(`http://localhost:5000/all-assignment/${id}`)
+        axios(url, {withCredentials: true})
             .then(res => {
                 setLoadedData(res.data)
             })
             .catch(error => {
                 console.log(error);
             })
-    }, []);
-    const { title, marks, image, difficulty, date, description, _id} = loadedData;
+    }, [url]);
+
     return (
         <div className="my-12">
-            <div className="text-center">
+            <div className="text-center lg:mx-0 mx-4">
                 <h1 className="text-3xl font-semibold mb-2">Assignment Details</h1>
-                <p>Welcome to the Assignment Details page! Here, you'll find comprehensive information about the selected assignment. Explore its description, difficulty level, marks, due date, and more. Take action by taking the assignment, updating it if needed, or returning to the assignments list. Dive into the details and make the most of your learning journey!</p>
+                <p className="lg:w-2/3 lg:mx-auto">Welcome to the Assignment Details page! Here, you'll find comprehensive information about the selected assignment. Explore its description, difficulty level, marks, due date, and more. Take action by taking the assignment, updating it if needed, or returning to the assignments list. Dive into the details and make the most of your learning journey!</p>
             </div>
-            <div className="mt-5 space-y-5">
+            <div className="mt-5 space-y-5 mx-4 lg:mx-0">
                 <img className="w-4/12 mx-auto" src={image} alt="" />
                 <div className="space-y-5">
                     <h1 className="text-3xl"><span className="font-semibold">Title: </span>{title}</h1>

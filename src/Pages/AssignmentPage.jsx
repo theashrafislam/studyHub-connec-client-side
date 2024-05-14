@@ -41,9 +41,9 @@ const AssignmentPage = () => {
                 <Helmet>
                     <title>Assignment || StudyHub Connect</title>
                 </Helmet>
-                <div className="text-center">
+                <div className="text-center lg:mx-0 mx-4">
                     <h1 className="text-xl lg:text-3xl font-semibold mb-2">Assignments</h1>
-                    <p className="w-7/12 mx-auto">Choose the level of challenge that suits your expertise and goals. Whether you are a beginner looking to learn the basics, an intermediate developer seeking to enhance your skills, or an advanced coder ready for a complex task, select your difficulty level and embark on a journey of growth and accomplishment.</p>
+                    <p className="lg:w-7/12 lg:mx-auto">Choose the level of challenge that suits your expertise and goals. Whether you are a beginner looking to learn the basics, an intermediate developer seeking to enhance your skills, or an advanced coder ready for a complex task, select your difficulty level and embark on a journey of growth and accomplishment.</p>
                 </div>
                 <div className="my-5 flex justify-center items-center">
                     <select className="select select-secondary w-full max-w-xs" value={selectedDifficulty} onChange={handleDifficultyChange}>

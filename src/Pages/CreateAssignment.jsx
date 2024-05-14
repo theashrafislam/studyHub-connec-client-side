@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { useLocation } from "react-router-dom";
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext);
@@ -13,6 +14,8 @@ const CreateAssignment = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
     const formattedDate = format(startDate, 'yyyy-MM-dd');
+
+    const location = useLocation();
 
     const handleAssignmentDifficulty = (e) => {
         const selectedDifficulty = e.target.value;
@@ -52,11 +55,11 @@ const CreateAssignment = () => {
                 <Helmet>
                     <title>Create Assignment || StudyHub Connect</title>
                 </Helmet>
-                <div className="text-center space-y-2">
+                <div className="text-center space-y-2 lg:mx-0 mx-4">
                     <h1 className="font-bold text-xl md:text-3xl">Create Assignment</h1>
-                    <p className="text-lg w-7/12 mx-auto">Welcome to the Create Assignment page! Here, you can easily create new assignments to share with all users on StudyHub Connect. Simply fill out the form below with the assignment details, including the title, description, marks, thumbnail image URL, difficulty level, and due date. Once submitted, your assignment will be available for all users to access and complete. Get started now and enrich the learning experience for everyone on our platform!</p>
+                    <p className="text-lg lg:w-7/12 lg:mx-auto">Welcome to the Create Assignment page! Here, you can easily create new assignments to share with all users on StudyHub Connect. Simply fill out the form below with the assignment details, including the title, description, marks, thumbnail image URL, difficulty level, and due date. Once submitted, your assignment will be available for all users to access and complete. Get started now and enrich the learning experience for everyone on our platform!</p>
                 </div>
-                <div className="mt-8">
+                <div className="mt-8 lg:mx-0 mx-4">
                     <form className="space-y-4" onSubmit={handleCreateAssignmentForm}>
                         <div className="flex lg:flex-row flex-col gap-4">
                             <div className="flex flex-col w-full">

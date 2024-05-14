@@ -52,7 +52,7 @@ const AssignmentCard = ({ assignment, setAssignments }) => {
     }
     
     return (
-        <div>
+        <div className='lg:mx-0 mx-4'>
             <div className="p-6 rounded-md shadow-md dark:bg-gray-50 dark:text-gray-900">
                 <img src={image} alt="" className="object-cover object-center w-full max-w-xs rounded-md h-72 dark:bg-gray-500" />
                 <div className="mt-6 mb-2">
@@ -63,7 +63,7 @@ const AssignmentCard = ({ assignment, setAssignments }) => {
                 <div className="flex justify-between items-center gap-2 mt-4 ">
                     <button onClick={() => handleDelete(_id)} className="btn btn-outline btn-secondary text-base">Delete</button>
                     <Link to={`/assignment-update/${_id}`} className="btn btn-outline btn-secondary text-base">Update</Link>
-                    <Link to={`/all-assignment/${_id}`} className="btn btn-outline btn-secondary text-base">View Details</Link>
+                    <Link to={`/assignment-details-page/${_id}`} className="btn btn-outline btn-secondary text-base">View Details</Link>
                 </div>
             </div>
             <Toaster/>

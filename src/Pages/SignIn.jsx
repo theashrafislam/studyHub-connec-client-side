@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 const SignIn = () => {
-    const { signInUser, signInWithGoogle } = useContext(AuthContext)
+    const { signInUser, signInWithGoogle } = useContext(AuthContext);
+    const location = useLocation()
+    console.log(location);
+    const navigate = useNavigate()
 
     const handleLoginForm = (event) => {
         event.preventDefault()
@@ -17,7 +20,10 @@ const SignIn = () => {
             .then(result => {
                 console.log(result);
                 if (result) {
-                    toast.success("Welcome back! You're now signed in and ready to go.");
+                    toast.success("Welcome back! You're now signed in and ready to go.", { duration: 3000 });
+                    setTimeout(() => {
+                        navigate(location.state ? location.state : '/')
+                    }, 3000);
                 }
             })
             .catch(error => {
@@ -30,9 +36,14 @@ const SignIn = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result);
+                toast.success("Welcome back! You're now signed in and ready to go.", { duration: 3000 })
+                setTimeout(() => {
+                    navigate(location.state ? location.state : '/')
+                }, 3000);
             })
             .catch(error => {
                 console.log(error);
+                toast.error("Sorry, we couldn't sign you in. Please check your credentials and try again.");
             })
     }
 

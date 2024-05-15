@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import spinnerImg from "../../public/loading.gif";
 
 const AssignmentDetails = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState({});
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
     console.log(loadedData);
     const { title, marks, image, difficulty, date, description, _id } = loadedData;
     const url = `https://study-hub-connect-server-side.vercel.app/all-assignment/${id}?email=${user.email}`
@@ -18,6 +20,9 @@ const AssignmentDetails = () => {
             })
             .catch(error => {
                 console.log(error);
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [url]);
 
@@ -30,6 +35,9 @@ const AssignmentDetails = () => {
                 <div className="text-center lg:mx-0 mx-4">
                     <h1 className="text-3xl font-semibold mb-2">Assignment Details</h1>
                     <p className="lg:w-2/3 lg:mx-auto">Welcome to the Assignment Details page! Here, you will find comprehensive information about the selected assignment. Explore its description, difficulty level, marks, due date, and more. Take action by taking the assignment, updating it if needed, or returning to the assignments list. Dive into the details and make the most of your learning journey!</p>
+                </div>
+                <div className="flex justify-center items-center mt-20">
+                    {loading && <img src={spinnerImg} className="w-[150px]" alt="Loading..." />}
                 </div>
                 <div className="mt-5 space-y-5 mx-4 lg:mx-0">
                     <img className="w-4/12 mx-auto" src={image} alt="" />

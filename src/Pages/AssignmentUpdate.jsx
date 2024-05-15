@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import spinnerImg from "../../public/loading.gif";
 
 const AssignmentUpdate = () => {
     const { id } = useParams();
@@ -12,6 +13,7 @@ const AssignmentUpdate = () => {
     console.log(loadedData);
     const [startDate, setStartDate] = useState('');
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
@@ -23,6 +25,9 @@ const AssignmentUpdate = () => {
                 })
                 .catch(error => {
                     console.log(error);
+                })
+                .finally(() => {
+                    setLoading(false)
                 })
         }
     }, [id, user])
@@ -62,6 +67,9 @@ const AssignmentUpdate = () => {
                 <div className="text-center space-y-2">
                     <h1 className="font-bold text-xl md:text-3xl">Update Assignment</h1>
                     <p className="text-lg">Welcome to the Update Assignment page! Here, you have the opportunity to modify and refine your assignments with ease. Whether you need to correct errors, adjust parameters, or enhance the content, this page empowers you to keep your assignments up-to-date and relevant. Take control of your assignments and ensure they align perfectly with your objectives and expectations.</p>
+                </div>
+                <div className="flex justify-center items-center mt-20">
+                    {loading && <img src={spinnerImg} className="w-[150px]" alt="Loading..." />}
                 </div>
                 <div className="mt-8">
                     <form className="space-y-4" onSubmit={handleUpdateAssignmentForm}>

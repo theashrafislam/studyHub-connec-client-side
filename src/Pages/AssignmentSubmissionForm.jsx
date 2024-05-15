@@ -4,13 +4,16 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import spinnerImg from "../../public/loading.gif";
 
 const AssignmentSubmissionForm = () => {
     const { user } = useContext(AuthContext);
     const userEmail = user?.email;
     const displayName = user?.displayName;
     const { id } = useParams();
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState('');
+    const [loading, setLoading] = useState(true);
+
     const url = `https://study-hub-connect-server-side.vercel.app/all-assignment/${id}?email=${userEmail}`
     useEffect(() => {
         axios(url, { withCredentials: true })
@@ -19,6 +22,9 @@ const AssignmentSubmissionForm = () => {
             })
             .catch(error => {
                 console.log(error);
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [url])
 
@@ -49,8 +55,11 @@ const AssignmentSubmissionForm = () => {
                 <Helmet>
                     <title>Assignment Submission Form || StudyHub Connect</title>
                 </Helmet>
+                <div className="flex justify-center items-center mt-20">
+                    {loading && <img src={spinnerImg} className="w-[150px]" alt="Loading..." />}
+                </div>
                 <h2 className="text-lg font-semibold text-gray-700 capitalize dark:text-white">Assignment Submission Form</h2>
-
+                
                 <form onSubmit={handleAssignmentSubmission}>
                     <div className="mt-6 space-y-5">
                         <div>

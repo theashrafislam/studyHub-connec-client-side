@@ -2,15 +2,6 @@ import { Link } from "react-router-dom";
 
 const PendingAssignmentsCard = ({ assignment, index }) => {
     const { displayName, title, submissionStatus } = assignment;
-    console.log(assignment._id);
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        const form = e.target;
-        const mark = form.mark.value;
-        const feedback = form.feedback.value;
-        console.log(mark, feedback);
-    }
 
     return (
         <tr>

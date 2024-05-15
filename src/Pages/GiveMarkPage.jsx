@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import spinnerImg from "../../public/loading.gif";
 
 const GiveMarkPage = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState([]);
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(true);
     console.log(user.email);
     const url = `https://study-hub-connect-server-side.vercel.app/submitted-assignment/id/${id}?email=${user.email}`
     useEffect(() => {
@@ -19,6 +21,9 @@ const GiveMarkPage = () => {
             })
             .catch(error => {
                 console.log(error);
+            })
+            .finally(() => {
+                setLoading(false)
             })
     }, [id, url]);
     const { title, pdfDocLink, additionalNotes } = loadedData;
@@ -88,6 +93,9 @@ const GiveMarkPage = () => {
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div className="flex justify-center items-center mt-20">
+                    {loading && <img src={spinnerImg} className="w-[150px]" alt="Loading..." />}
                 </div>
                 <div>
                     <form className="my-2 space-y-2" onSubmit={handleSubmit}>

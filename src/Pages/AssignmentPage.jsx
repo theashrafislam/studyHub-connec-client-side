@@ -5,10 +5,12 @@ import NoData from "../Components/NoData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
 
+
 const AssignmentPage = () => {
     const allAssignments = useLoaderData();
     const [selectedDifficulty, setSelectedDifficulty] = useState("default");
     const [assignments, setAssignments] = useState(null);
+
 
     useEffect(() => {
         const filterAssignments = allAssignments.filter(assignment => {
@@ -21,7 +23,7 @@ const AssignmentPage = () => {
         setSelectedDifficulty(event.target.value);
     };
 
-    
+
 
     const handleUpdate = (id) => {
         axios.get(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`)
@@ -58,23 +60,23 @@ const AssignmentPage = () => {
                     {
                         selectedDifficulty === "default" ? (
                             ""
-                        ) 
-                        
-                        :
-                        
-                        (
-                            assignments && assignments.length > 0 ? (
-                                assignments.map(assignment => <AssignmentCard setAssignments={setAssignments} handleUpdate={handleUpdate} key={assignment._id} assignment={assignment} />)
-                            ) 
-                            
-                            : 
-                            
-                            (
-                                <div className="col-span-full flex justify-center items-center">
-                                    <NoData />
-                                </div>
-                            )
                         )
+
+                            :
+
+                            (
+                                assignments && assignments.length > 0 ? (
+                                    assignments.map(assignment => <AssignmentCard setAssignments={setAssignments} handleUpdate={handleUpdate} key={assignment._id} assignment={assignment} />)
+                                )
+
+                                    :
+
+                                    (
+                                        <div className="col-span-full flex justify-center items-center">
+                                            <NoData />
+                                        </div>
+                                    )
+                            )
                     }
                 </div>
             </div>

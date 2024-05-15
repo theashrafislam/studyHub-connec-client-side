@@ -4,6 +4,8 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const AssignmentDetails = () => {
     const { id } = useParams();
@@ -28,7 +30,12 @@ const AssignmentDetails = () => {
 
     return (
         <HelmetProvider>
-            <div className="my-12">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="my-12">
                 <Helmet>
                     <title>Assignment Details || StudyHub Connect</title>
                 </Helmet>
@@ -50,7 +57,7 @@ const AssignmentDetails = () => {
                         <Link to={`/assignment-submission-form/${_id}`} className="btn btn-outline btn-secondary w-full font-bold text-lg">Take Assignment</Link>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

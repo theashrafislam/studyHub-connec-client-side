@@ -4,6 +4,8 @@ import axios from "axios";
 import AttemtedAssignmentCard from "./AttemtedAssignmentCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const MyAttemtedAssignments = () => {
     const { user } = useContext(AuthContext);
@@ -26,7 +28,12 @@ const MyAttemtedAssignments = () => {
     }, [url])
     return (
         <HelmetProvider>
-            <div className="my-12">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="my-12">
                 <Helmet>
                     <title>Your Attempted Assignments || StudyHub Connect</title>
                 </Helmet>
@@ -42,7 +49,7 @@ const MyAttemtedAssignments = () => {
                         myAssignment.map(assignment => <AttemtedAssignmentCard key={assignment._id} assignment={assignment} />)
                     }
                 </div>
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

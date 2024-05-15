@@ -5,6 +5,8 @@ import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const AssignmentSubmissionForm = () => {
     const { user } = useContext(AuthContext);
@@ -51,7 +53,12 @@ const AssignmentSubmissionForm = () => {
 
     return (
         <HelmetProvider>
-            <section className="max-w-4xl p-6 lg:mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-12 mx-4">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="max-w-4xl p-6 lg:mx-auto bg-white rounded-md shadow-md dark:bg-gray-800 mt-12 mx-4">
                 <Helmet>
                     <title>Assignment Submission Form || StudyHub Connect</title>
                 </Helmet>
@@ -78,7 +85,7 @@ const AssignmentSubmissionForm = () => {
                     </div>
                 </form>
                 <Toaster />
-            </section>
+            </motion.div>
         </HelmetProvider>
     );
 };

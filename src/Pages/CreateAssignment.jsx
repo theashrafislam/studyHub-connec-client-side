@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext);
@@ -49,7 +51,12 @@ const CreateAssignment = () => {
 
     return (
         <HelmetProvider>
-            <div className="my-10">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="my-10">
                 <Helmet>
                     <title>Create Assignment || StudyHub Connect</title>
                 </Helmet>
@@ -104,7 +111,7 @@ const CreateAssignment = () => {
                     </form>
                 </div>
                 <Toaster />
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

@@ -5,6 +5,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const GiveMarkPage = () => {
     const { id } = useParams();
@@ -48,7 +50,12 @@ const GiveMarkPage = () => {
     }
     return (
         <HelmetProvider>
-            <div className="mt-10 lg:mx-0 mx-4">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="mt-10 lg:mx-0 mx-4">
                 <Helmet>
                     <title>Give Mark Page || StudyHub Connect</title>
                 </Helmet>
@@ -113,7 +120,7 @@ const GiveMarkPage = () => {
                     </form>
                 </div>
                 <Toaster />
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

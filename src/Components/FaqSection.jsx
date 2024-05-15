@@ -1,7 +1,14 @@
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 const FaqSection = () => {
     return (
         <section className="dark:bg-gray-100 dark:text-gray-800">
-        <div className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
+        <motion.div
+        variants={fadeIn('up', 0.2)}
+        initial='hidden'
+        whileInView={'show'}
+        viewport={{once: false, amount: 0.7}}
+        className="container flex flex-col justify-center px-4 py-8 mx-auto md:p-8">
             <h2 className="text-2xl font-semibold sm:text-4xl">Frequently Asked Questions</h2>
             <p className="mt-4 mb-8 dark:text-gray-600">Have questions about StudyHub Connect? We're here to help! Dive into our FAQs below to find the answers you're looking for.</p>
             <div className="space-y-4">
@@ -22,7 +29,7 @@ const FaqSection = () => {
                     <p className="px-4 py-6 pt-0 ml-4 -mt-4 dark:text-gray-600">Once you've signed up for an account, you'll have access to a wide range of study materials and resources. Simply navigate to the "Resources" section to explore our curated collection of articles, videos, textbooks, and more. You can also use our search feature to find specific topics or subjects you're interested in. Happy studying!</p>
                 </details>
             </div>
-        </div>
+        </motion.div>
     </section>
     );
 };

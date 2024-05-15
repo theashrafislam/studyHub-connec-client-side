@@ -5,13 +5,15 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const AssignmentUpdate = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState({});
     const { user } = useContext(AuthContext);
     console.log(loadedData);
-    const [startDate, setStartDate] = useState('');
+    // const [startDate, setStartDate] = useState('');
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -31,7 +33,7 @@ const AssignmentUpdate = () => {
                 })
         }
     }, [id, user])
-    const { marks, image, difficulty, description, _id, title, date } = loadedData;
+    const { marks, image, difficulty, description, title, date } = loadedData;
     // console.log(difficulty);
 
     const handleUpdateAssignmentForm = (e) => {
@@ -60,13 +62,18 @@ const AssignmentUpdate = () => {
     }
     return (
         <HelmetProvider>
-            <div className="my-10 lg:mx-0 mx-4">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="my-10 lg:mx-0 mx-4">
                 <Helmet>
                     <title>Update Assignment || StudyHub Connect</title>
                 </Helmet>
                 <div className="text-center space-y-2">
                     <h1 className="font-bold text-xl md:text-3xl">Update Assignment</h1>
-                    <p className="text-lg">Welcome to the Update Assignment page! Here, you have the opportunity to modify and refine your assignments with ease. Whether you need to correct errors, adjust parameters, or enhance the content, this page empowers you to keep your assignments up-to-date and relevant. Take control of your assignments and ensure they align perfectly with your objectives and expectations.</p>
+                    <p className="text-lg w-2/3 mx-auto">Welcome to the Update Assignment page! Here, you have the opportunity to modify and refine your assignments with ease. Whether you need to correct errors, adjust parameters, or enhance the content, this page empowers you to keep your assignments up-to-date and relevant. Take control of your assignments and ensure they align perfectly with your objectives and expectations.</p>
                 </div>
                 <div className="flex justify-center items-center mt-20">
                     {loading && <img src={spinnerImg} className="w-[150px]" alt="Loading..." />}
@@ -121,7 +128,7 @@ const AssignmentUpdate = () => {
                     </form>
                 </div>
                 <Toaster />
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

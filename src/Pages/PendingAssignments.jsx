@@ -4,6 +4,8 @@ import axios from "axios";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import spinnerImg from "../../public/loading.gif";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const PendingAssignments = () => {
     const [loadedData, setLoadedData] = useState([]);
@@ -25,7 +27,12 @@ const PendingAssignments = () => {
     }, [url])
     return (
         <HelmetProvider>
-            <div className="mt-10">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="mt-10">
                 <Helmet>
                     <title>Pending Assignments || StudyHub Connect</title>
                 </Helmet>
@@ -59,7 +66,7 @@ const PendingAssignments = () => {
                         </table>
                     </div>
                 </div>
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

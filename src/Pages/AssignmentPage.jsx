@@ -4,6 +4,8 @@ import AssignmentCard from "../Components/AssignmentCard";
 import NoData from "../Components/NoData";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import axios from "axios";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 
 const AssignmentPage = () => {
@@ -39,7 +41,12 @@ const AssignmentPage = () => {
 
     return (
         <HelmetProvider>
-            <div className="my-10">
+            <motion.div
+            variants={fadeIn('down', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="my-10">
                 <Helmet>
                     <title>Assignment || StudyHub Connect</title>
                 </Helmet>
@@ -79,7 +86,7 @@ const AssignmentPage = () => {
                             )
                     }
                 </div>
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

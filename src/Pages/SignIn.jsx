@@ -4,6 +4,9 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
+
 const SignIn = () => {
     const { signInUser, signInWithGoogle } = useContext(AuthContext);
     const location = useLocation()
@@ -49,7 +52,12 @@ const SignIn = () => {
 
     return (
         <HelmetProvider>
-            <div className="mt-16">
+            <motion.div
+            variants={fadeIn('up', 0.2)}
+            initial='hidden'
+            whileInView={'show'}
+            viewport={{once: false, amount: 0.7}}
+            className="mt-16">
                 <Helmet>
                     <title>Sign In || StudyHub Connect</title>
                 </Helmet>
@@ -113,7 +121,7 @@ const SignIn = () => {
                     </div>
                 </div>
                 <Toaster />
-            </div>
+            </motion.div>
         </HelmetProvider>
     );
 };

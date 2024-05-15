@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
 
 const Footer = () => {
     return (
-        <div>
+        <motion.div variants={fadeIn('up', 0.2)}
+        initial='hidden'
+        whileInView={'show'}
+        viewport={{once: false, amount: 0.7}}>
             <footer className=" bg-gray-900 mt-16">
                 <div className="container px-6 py-9 mx-auto">
                     <div className="flex flex-col items-center text-center">
@@ -60,7 +65,7 @@ const Footer = () => {
                     </div>
                 </div>
             </footer>
-        </div>
+        </motion.div>
     );
 };
 

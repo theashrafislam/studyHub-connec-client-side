@@ -4,6 +4,9 @@ import { useContext } from 'react';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { motion } from "framer-motion"
+import { fadeIn } from "../variants"
+
 const SignUp = () => {
     const { signUpUser, updateUserProfile, signOutUser } = useContext(AuthContext);
     const navigate = useNavigate()
@@ -61,7 +64,12 @@ const SignUp = () => {
                 <Helmet>
                     <title>Sign Up || StudyHub Connect</title>
                 </Helmet>
-                <section className="bg-white dark:bg-gray-900">
+                <motion.div 
+                variants={fadeIn('up', 0.2)}
+                initial='hidden'
+                whileInView={'show'}
+                viewport={{once: false, amount: 0.7}}
+                className="bg-white dark:bg-gray-900">
                     <div className="container flex items-center justify-center min-h-screen px-6 mx-auto">
                         <form className="w-full max-w-md" onSubmit={handleFormSubmit}>
                             <div className="flex justify-center mx-auto">
@@ -127,7 +135,7 @@ const SignUp = () => {
                             </div>
                         </form>
                     </div>
-                </section>
+                </motion.div>
                 <Toaster />
             </div>
         </HelmetProvider>

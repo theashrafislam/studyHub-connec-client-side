@@ -2,22 +2,23 @@ import { useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { MdWbSunny } from "react-icons/md";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import axios from "axios";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
     console.log(user);
 
     const navLinks = <>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/">Home</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/assignment">Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/sign-in">Sign In</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/sign-up">Sign Up</NavLink></li>
+        <li className="font-semibold"><NavLink to="/">Home</NavLink></li>
+        <li className="font-semibold"><NavLink to="/assignment">Assignments</NavLink></li>
+        <li className="font-semibold"><NavLink to="/sign-in">Sign In</NavLink></li>
+        <li className="font-semibold"><NavLink to="/sign-up">Sign Up</NavLink></li>
     </>
     const loggedNaLinks = <>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/">Home</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/assignment">Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/create-assignment">Create Assignments</NavLink></li>
-        <li className="font-semibold" data-aos="fade-down" data-aos-duration="500"><NavLink to="/pending-assignments">Pending Assignments</NavLink></li>
+        <li className="font-semibold"><NavLink to="/">Home</NavLink></li>
+        <li className="font-semibold"><NavLink to="/assignment">Assignments</NavLink></li>
+        <li className="font-semibold"><NavLink to="/create-assignment">Create Assignments</NavLink></li>
+        <li className="font-semibold"><NavLink to="/pending-assignments">Pending Assignments</NavLink></li>
     </>
 
     useEffect(() => {
@@ -41,14 +42,19 @@ const Navbar = () => {
         signOutUser()
             .then(result => {
                 console.log(result);
+
             })
             .catch(error => {
                 console.log(error);
             })
+        axios.post('https://study-hub-connect-server-side.vercel.app/logout', {}, { withCredentials: true })
+            .then(res => {
+                console.log(res.data);
+            })
     }
 
     return (
-        <div className="navbar bg-gray-100 rounded-lg">
+        <div className="navbar bg-gray-100 rounded-lg fixed top-0 w-full left-0 right-0 z-50 max-w-7xl mx-auto">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -85,7 +91,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn m-1"><MdWbSunny className="text-3xl" /></div>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li onClick={() => handleThemeChange('dark')}><a>Dark</a></li>
+                            <li onClick={() => handleThemeChange('dark')}><a>Dark</a></li>
                             <li onClick={() => handleThemeChange('light')}><a>Light</a></li>
                             <li onClick={() => handleThemeChange('system')}><a>System</a></li>
                         </ul>

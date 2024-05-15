@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types';
+
 const AttemtedAssignmentCard = ({ assignment }) => {
-    const { additionalNotes, pdfDocLink, submissionStatus, feedback, mark, id, title} = assignment;
+    const { additionalNotes, submissionStatus, feedback, mark, id, title} = assignment;
     return (
         <div className="mt-10 mx-4 lg:mx-0">
             <div className="w-full px-4 py-3 bg-white rounded-md shadow-md dark:bg-gray-800">
@@ -27,3 +29,7 @@ const AttemtedAssignmentCard = ({ assignment }) => {
 };
 
 export default AttemtedAssignmentCard;
+
+AttemtedAssignmentCard.propTypes = {
+    assignment: PropTypes.object
+}

@@ -6,7 +6,6 @@ import { format } from 'date-fns';
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { useLocation } from "react-router-dom";
 
 const CreateAssignment = () => {
     const { user } = useContext(AuthContext);
@@ -15,7 +14,6 @@ const CreateAssignment = () => {
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
     const formattedDate = format(startDate, 'yyyy-MM-dd');
 
-    const location = useLocation();
 
     const handleAssignmentDifficulty = (e) => {
         const selectedDifficulty = e.target.value;
@@ -33,9 +31,9 @@ const CreateAssignment = () => {
         const difficulty = assignmentDifficulty;
         const date = formattedDate;
         const assignmentData = { title, marks, description, image, difficulty, date, userEmail }
-        console.log(assignmentData);
+        // console.log(assignmentData);
 
-        axios.post('https://study-hub-connect-server-side.vercel.app/create-assignment', assignmentData)
+        axios.post(`https://study-hub-connect-server-side.vercel.app/create-assignment?email=${userEmail}`, assignmentData, {withCredentials: true})
             .then(res => {
                 console.log(res.data);
                 if (res.data) {
@@ -81,8 +79,14 @@ const CreateAssignment = () => {
                                 <input type="text" name="image" id="image" className="border-2 p-2 rounded-lg" placeholder="Enter your image URL" required />
                             </div>
                             <div className="flex flex-col w-full">
-                                <label htmlFor="" className="text-lg font-bold">Assignment Difficulty</label>
-                                <select className="select select-bordered w-full" value={assignmentDifficulty} onChange={handleAssignmentDifficulty}>
+                                <label htmlFor="difficulty" className="text-lg font-bold">Assignment Difficulty</label>
+                                <select
+                                    id="difficulty"
+                                    className="select select-bordered w-full"
+                                    value={assignmentDifficulty}
+                                    onChange={handleAssignmentDifficulty}
+                                    required
+                                >
                                     <option value="" disabled>Select Assignment Difficulty Level</option>
                                     <option value="Easy">Easy</option>
                                     <option value="Medium">Medium</option>

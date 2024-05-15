@@ -1,29 +1,33 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const AssignmentUpdate = () => {
     const { id } = useParams();
     const [loadedData, setLoadedData] = useState({});
+    const { user } = useContext(AuthContext);
     console.log(loadedData);
     const [startDate, setStartDate] = useState('');
     const [assignmentDifficulty, setAssignmentDifficulty] = useState('');
 
 
     useEffect(() => {
-        axios.get(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}`)
-            .then(res => {
-                // console.log(res.data);
-                setLoadedData(res.data)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    }, [id])
+        if (user?.email) {
+            axios.get(`https://study-hub-connect-server-side.vercel.app/all-assignment/${id}?email=${user?.email}`, { withCredentials: true })
+                .then(res => {
+                    // console.log(res.data);
+                    setLoadedData(res.data)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+    }, [id, user])
     const { marks, image, difficulty, description, _id, title, date } = loadedData;
-    console.log(difficulty);
+    // console.log(difficulty);
 
     const handleUpdateAssignmentForm = (e) => {
         e.preventDefault();

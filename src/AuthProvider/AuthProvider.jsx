@@ -53,7 +53,6 @@ const AuthProvider = ({ children }) => {
             console.log('current user', currentUser);
             setLoading(false)
             if(currentUser) {
-
                 axios.post('https://study-hub-connect-server-side.vercel.app/jwt', loggedUser, {withCredentials: true})
                     .then(res => {
                         console.log('token response', res.data);

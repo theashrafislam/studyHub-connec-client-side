@@ -13,59 +13,69 @@ import MyAttemtedAssignments from "../Pages/MyAttemtedAssignments";
 import PendingAssignments from "../Pages/PendingAssignments";
 import GiveMarkPage from "../Pages/GiveMarkPage";
 import PrivateRoute from "./PrivateRoute";
+import MyProfile from "../Pages/MyProfile";
+import UpdateProfile from "../Pages/UpdateProfile";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Root/>,
+        element: <Root />,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: "/",
-                element: <Home/>
+                element: <Home />
             },
             {
                 path: "/sign-in",
-                element: <SignIn/>
+                element: <SignIn />
             },
             {
                 path: "/sign-up",
-                element: <SignUp/>
+                element: <SignUp />
             },
             {
                 path: "/assignment",
-                element: <AssignmentPage/>,
+                element: <AssignmentPage />,
                 loader: () => fetch('https://study-hub-connect-server-side.vercel.app/all-assignment')
             },
             {
                 path: "/create-assignment",
-                element: <PrivateRoute><CreateAssignment/></PrivateRoute>
+                element: <PrivateRoute><CreateAssignment /></PrivateRoute>
             },
             {
                 path: "/assignment-update/:id",
-                element: <PrivateRoute><AssignmentUpdate/></PrivateRoute>,
+                element: <PrivateRoute><AssignmentUpdate /></PrivateRoute>,
             },
             {
                 path: "/assignment-details-page/:id",
-                element: <PrivateRoute><AssignmentDetails/></PrivateRoute>,
+                element: <PrivateRoute><AssignmentDetails /></PrivateRoute>,
                 // loader: ({params}) => fetch(`https://study-hub-connect-server-side.vercel.app/all-assignment/${params.id}`)
             },
             {
                 path: "/assignment-submission-form/:id",
-                element: <PrivateRoute><AssignmentSubmissionForm/></PrivateRoute>
+                element: <PrivateRoute><AssignmentSubmissionForm /></PrivateRoute>
             },
             {
                 path: "/my-attemted-assignments",
-                element: <PrivateRoute><MyAttemtedAssignments/></PrivateRoute>
+                element: <PrivateRoute><MyAttemtedAssignments /></PrivateRoute>
+            },
+            {
+                path: "/my-profile",
+                element: <PrivateRoute><MyProfile /></PrivateRoute>
+            },
+            {
+                path: "/update-profile",
+                element: <PrivateRoute><UpdateProfile/></PrivateRoute>
             },
             {
                 path: "/pending-assignments",
-                element: <PrivateRoute><PendingAssignments/></PrivateRoute>,
+                element: <PrivateRoute><PendingAssignments /></PrivateRoute>,
                 // loader: () => fetch('https://study-hub-connect-server-side.vercel.app/submitted-assignment')
             },
             {
                 path: "/give-mark-page/:id",
-                element: <PrivateRoute><GiveMarkPage/></PrivateRoute>,
+                element: <PrivateRoute><GiveMarkPage /></PrivateRoute>,
             }
         ]
     },

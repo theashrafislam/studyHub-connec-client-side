@@ -50,7 +50,6 @@ const AuthProvider = ({ children }) => {
             const userEmail = currentUser?.email || user?.email;
             const loggedUser = {email: userEmail};
             setUser(currentUser);
-            console.log('current user', currentUser);
             setLoading(false)
             if(currentUser) {
                 axios.post('https://study-hub-connect-server-side.vercel.app/jwt', loggedUser, {withCredentials: true})
@@ -72,6 +71,7 @@ const AuthProvider = ({ children }) => {
 
     const authInfo = {
         signUpUser,
+        setUser,
         user,
         updateUserProfile,
         loading,

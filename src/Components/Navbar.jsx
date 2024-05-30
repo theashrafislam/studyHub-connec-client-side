@@ -6,7 +6,6 @@ import axios from "axios";
 
 const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext);
-    console.log(user);
 
     const navLinks = <>
         <li className="font-semibold"><NavLink to="/">Home</NavLink></li>
@@ -81,6 +80,7 @@ const Navbar = () => {
                                 </div>
                             </div>
                             <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+                                <li><Link to="/my-profile">My Profile</Link></li>
                                 <li><Link to="/my-attemted-assignments">My Attempted Assignments</Link></li>
                                 <li onClick={handleLogOutUser}><a>Logout</a></li>
                             </ul>
